@@ -1,36 +1,42 @@
-require("dotenv/config");
-const mysql = require("./mysql");
+require("dotenv").config();
+const createConnection = require("./sqlite");
 
 (async () => {
-  const connection = await mysql;
+  try {
+    const db = await createConnection();
 
-  await connection.query(`
-    CREATE TABLE IF NOT EXISTS products (
-      id int PRIMARY KEY AUTO_INCREMENT,
-      name varchar(255) NOT NULL,
-      units int NOT NULL default 0,
-      price decimal(10, 2) NOT NULL,
-      image varchar(255) NOT NULL
-    );
-  `);
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS products (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL,
+        units INTEGER NOT NULL DEFAULT 0,
+        price DECIMAL(10, 2) NOT NULL,
+        image TEXT NOT NULL
+      );
+    `);
 
-  await connection.query(`
-    CREATE TABLE IF NOT EXISTS users (
-      id int PRIMARY KEY AUTO_INCREMENT,
-      name varchar(255) NOT NULL
-    );
-  `);
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS users (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        name TEXT NOT NULL
+      );
+    `);
 
-  await connection.query(`
-    CREATE TABLE IF NOT EXISTS purchases (
-      id int PRIMARY KEY AUTO_INCREMENT,
-      user_id int NOT NULL,
-      product_id int NOT NULL,
-      units int NOT NULL,
-      FOREIGN KEY (user_id) REFERENCES users(id),
-      FOREIGN KEY (product_id) REFERENCES products(id)
-    );
-  `);
+    await db.exec(`
+      CREATE TABLE IF NOT EXISTS purchases (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        user_id INTEGER NOT NULL,
+        product_id INTEGER NOT NULL,
+        units INTEGER NOT NULL,
+        FOREIGN KEY (user_id) REFERENCES users(id),
+        FOREIGN KEY (product_id) REFERENCES products(id)
+      );
+    `);
 
-  process.exit();
+    console.log("Tables created successfully.");
+  } catch (error) {
+    console.error("Error creating tables:", error);
+  } finally {
+    process.exit();
+  }
 })();

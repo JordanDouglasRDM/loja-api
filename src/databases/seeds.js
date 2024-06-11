@@ -49,6 +49,54 @@ const createConnection = require("./sqlite");
         "https://m.media-amazon.com/images/I/41z6lekLE1L._AC_SX466_.jpg"
       )
     `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Teclado Gamer Semi Mecânico com Fio USB e Iluminação LED RGB Teclado Preto",
+        25,
+        78.90,
+        "https://http2.mlstatic.com/D_NQ_NP_884912-MLU72067385668_102023-O.webp"
+      )
+    `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Mouse Gamer Para Jogo 3.200 Dpi Óptico Com Led Rgb Usb Exbom",
+        15,
+        39.92,
+        "https://http2.mlstatic.com/D_NQ_NP_916293-MLB76747490319_052024-O.webp"
+      )
+    `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Mousepad Gamer Abstract Liquid Todos Tamanhos Profissional",
+        19,
+        39.52,
+        "https://http2.mlstatic.com/D_NQ_NP_946824-MLB69402428553_052023-O.webp"
+      )
+    `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Mochila Impermeável NotebookCor Preto Desenho Do Tecido Moderno Executivo",
+        7,
+        169.10,
+        "https://http2.mlstatic.com/D_NQ_NP_952194-MLU70975006646_082023-O.webp"
+      )
+    `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Cabo Hdmi 2.0 4k Blindado 5m Ponta Gold 60hz Aquário",
+        6,
+        28.75,
+        "https://http2.mlstatic.com/D_NQ_NP_918615-MLB52591014813_112022-O.webp"
+      )
+    `);
+    await db.run(`
+      INSERT INTO products (name, units, price, image) VALUES (
+        "Impressora a cor multifuncional Epson EcoTank L3250 com wifi preta 110V",
+        50,
+        1045.99,
+        "https://http2.mlstatic.com/D_NQ_NP_984266-MLA48196101433_112021-O.webp"
+      )
+    `);
 
     console.log("Seed data inserted successfully.");
   } catch (error) {
